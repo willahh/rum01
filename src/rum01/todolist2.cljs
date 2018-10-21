@@ -3,10 +3,11 @@
 
 (def state #:state {:rows [{:id 1 :name "Todo 1"}]
                     :click-count 0})
+(def state-key ::state)
 
 (defc root-view < rum/reactive [todolist-state]
   [:div
-   [:h3 "todolist2 - a"]
+   [:h3 "todolist2 - b"]
    (let [todolist-rows (rum/cursor todolist-state :rows)]
      [:div
       [:div (apply conj

@@ -8,20 +8,20 @@
    [rum01.dashboard :as dashboard]
    [clojure.string :as str]))
 
+
+
 (defc swap-view < rum/reactive [app-state]
   [:div
-   (apply conj [:div]
+   (apply conj [:div.ui.secondary.pointing.menu]
           (map (fn [m]
-                 [:button
-                  {:data-value m
-                   :on-click (fn [event]
-                               (let [view-name (.getAttribute event.target "data-value")
-                                     view-name (keyword (.-innerText event.target))]
-                                 (js/console.log view-name)
-                                 (println (keyword view-name))
-                                 (swap! app-state update-in [:current-view] (fn []
-                                                                              (keyword view-name)))
-                                 ))} (str m)])
+                 [:button.item
+                  {:on-click (fn [event]
+                               (let [view-name (keyword (.-innerText event.target))]
+                                 (swap! app-state update-in [:current-view]
+                                        (fn []
+                                          (keyword view-name)))))}
+                  ;; (last (str/split (str m) #"/"))
+                  (str m)])
                (map (fn [m]
                       (str/replace-first (str (first m)) ":" ""))
                     (:view-list @app-state))))])

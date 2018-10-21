@@ -2,6 +2,7 @@
   (:require [rum.core :as rum :refer [defc]]))
 
 (def state #:state {:click-count 0})
+(def state-key ::state)
 
 (defc root-view < rum/reactive [home-state]
   [:div
