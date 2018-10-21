@@ -8,8 +8,12 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.339"]
-
-                 [rum "0.11.2"]]
+                 [rum "0.11.2"]
+                 
+                 ;; Clojurescript
+                 [secretary "1.2.3"]
+                 [venantius/accountant "0.2.4"]
+                 [cljs-ajax "0.7.4"]]
 
   :source-paths ["src"]
 

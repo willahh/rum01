@@ -14,7 +14,7 @@
    (let [todolist-rows (rum/cursor todolist-state :rows)
          click-count (rum/cursor todolist-state :click-count)]
      [:div
-      [:h3 "todolist"]
+      [:h3 "todolist 4"]
       ;; [:div "todolis-state: " (pr-str (rum/react todolist-state))]
       [:div "Click count: "
        [:div {:on-click #(swap! click-count inc)} (pr-str (rum/react click-count))]]

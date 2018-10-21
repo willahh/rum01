@@ -1,5 +1,6 @@
 (ns rum01.front.user.user-list
-  (:require [rum.core :as rum :refer [defc]]))
+  (:require [rum.core :as rum :refer [defc]]
+            ))
 
 (def state #:state {:rows [{:id 1
                             :first-name "John"
@@ -13,4 +14,10 @@
 
 (defc user-list-view < rum/reactive [todolist-state]
   [:div
-   [:h3 "User list"]])
+   [:h3 "User list"]
+   ;; (pr-str (@todolist-state))
+
+   ])
+
+
+
