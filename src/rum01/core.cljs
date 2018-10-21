@@ -44,10 +44,36 @@
    [:div "State:"
     (pr-str home-state)]])
 
+(defc debug < rum/reactive [app-state]
+  (let [current-view-key (rum/cursor-in app-state [:current-view])
+        view-list (rum/cursor-in app-state [:view-list])
+        current-view (@current-view-key @view-list)
+        current-view-fn (:fn current-view)
+        current-view-state (rum/cursor app-state [:view-list :todolist])]
+    [:div [:div "current-view-key: " (pr-str (rum/react current-view-key))]
+     [:div "current-view-state: " (pr-str current-view-state)]
+     [:div "current-view" (pr-str current-view)]
+     [:div "View list:"
+      (map (fn [m]
+             [:span (str (first m) " ")]) (:view-list @app-state))]]))
 
-;; (let [current-view (rum/cursor-in app-state [:current-view])
-;;       view-list (rum/cursor-in app-state [:view-list])]
-;;   (@current-view @view-list))
+(defc swap-view < rum/reactive [app-state]
+  [:div
+   [:h3 "Swap view"]
+   (apply conj [:div]
+          (map (fn [m]
+                 [:button
+                  {:data-value m
+                   :on-click (fn [event]
+                               (let [view-name (.getAttribute event.target "data-value")
+                                     ]
+                                 (js/console.log view-name)
+                                 (println (keyword view-name))
+                                 (swap! app-state update-in [:current-view] (fn []
+                                                                              (keyword view-name)))
+                                 ))} (str m)])
+               (map first (:view-list @app-state))))
+   ])
 
 (defc root-component < rum/reactive [app-state]
   (let [todolist-rows (rum/cursor app-state [:todolist])
@@ -55,23 +81,10 @@
         view-list (rum/cursor-in app-state [:view-list])
         current-view (@current-view-key @view-list)
         current-view-fn (:fn current-view)
-        ;; current-view-state (:state current-view)
-        current-view-state (rum/cursor app-state [:view-list :todolist])
-        
-        ;; view-list (rum/cursor app-state [:view-list])
-        ;; current-view-key (:current-view @app-state)
-        ;; current-view-state (:state (current-view-key (:view-list @app-state)))
-        ;; current-view-fn (:fn (current-view-key (:view-list @app-state)))
-        ]
+        current-view-state (rum/cursor app-state [:view-list (rum/react current-view-key)])]
     [:div
-     [:h1 "Root"]
-     [:div "current-view-key: " (pr-str (rum/react current-view-key))]
-     [:div "current-view-state: " (pr-str current-view-state)]
-     [:div "current-view" (pr-str current-view)]
-     [:div "View list:"
-      (map (fn [m]
-             [:span (str (first m) " ")]) (:view-list @app-state))]
-
+     (debug app-state)
+     (swap-view app-state)
      [:h2 "Current view fn"]
      [:div (current-view-fn current-view-state)]
 
