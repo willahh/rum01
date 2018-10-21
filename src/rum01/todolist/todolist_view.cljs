@@ -1,11 +1,12 @@
 (ns rum01.todolist.todolist-view
-  (:require [rum.core :as rum :refer [defc]]))
+  (:require [rum.core :as rum :refer [defc]]
+            [rum01.state :as state]))
 
-(def state {:rows [{:id 1 :name "Todo 1"}
-                   {:id 2 :name "Todo 2"}]
-            :click-count 0})
-
-(def state-key ::state)
+(def state #:state {:key :state
+                    :rows [{:id 1 :name "Todo 1"}
+                           {:id 2 :name "Todo 2"}]
+                    :click-count 0
+                    :nb 0})
 
 (defc root-view < rum/reactive [todolist-state]
   [:div

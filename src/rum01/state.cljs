@@ -5,14 +5,14 @@
             [rum01.home :as home]))
 
 (defonce app-state
-  (atom {:current-view ::rum01.todolist2/state-key
+  (atom {:current-view ::state.todolist2
          
-         ::home/state-key home/state
-         ::todolist-view/state-key todolist-view/state
-         ::rum01.todolist2/state-key rum01.todolist2/state
+         ::state.home home/state
+         ::state.todolist-view todolist-view/state
+         ::state.todolist2 rum01.todolist2/state
          
          :view-list {
-                     ::home/state-key home/root-view
-                     ::todolist-view/state-key todolist-view/root-view
-                     ::rum01.todolist2/state-key todolist2/root-view
-                     ::dashboard/state-key dashboard/root-view}}))
+                     ::state.home home/root-view
+                     ::state.todolist-view todolist-view/root-view
+                     ::state.todolist2 todolist2/root-view
+                     ::state.dashboard dashboard/root-view}}))

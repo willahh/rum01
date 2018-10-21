@@ -2,9 +2,7 @@
   (:require [rum.core :as rum :refer [defc]]
             [rum01.todolist.todolist-view :as todolist-view]))
 
-(def state {:click-count 0})
-
-(def state-key ::state)
+(def state #:state {:click-count 0})
 
 (defc root-view < rum/reactive [home-state]
   [:div
