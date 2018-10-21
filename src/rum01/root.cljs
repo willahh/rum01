@@ -8,31 +8,30 @@
    [rum01.dashboard :as dashboard]
    [clojure.string :as str]))
 
-
-
-(defc swap-view < rum/reactive [app-state]
+(defc main-nav < rum/reactive [app-state]
   [:div
    (apply conj [:div.ui.secondary.pointing.menu]
           (map (fn [m]
-                 [:button.item
-                  {:on-click (fn [event]
-                               (let [view-name (keyword (.-innerText event.target))]
+                 [:button
+                  {:fn (str/replace-first (-> m first str) #":" "")
+                   :class (str "item " (when (= (:current-view @app-state) (-> m first))
+                                         "active"))
+                   :on-click (fn [event]
+                               (let [view-name (.getAttribute event.target "fn")]
                                  (swap! app-state update-in [:current-view]
                                         (fn []
                                           (keyword view-name)))))}
-                  ;; (last (str/split (str m) #"/"))
-                  (str m)])
-               (map (fn [m]
-                      (str/replace-first (str (first m)) ":" ""))
-                    (:view-list @app-state))))])
+                  (-> m last :name)
+                  ])
+               (:view-list @app-state)))])
 
 (defc root-component < rum/reactive [app-state]
   (let [current-view-key (rum/cursor-in app-state [:current-view])
         view-list (rum/cursor-in app-state [:view-list])
-        current-view (@current-view-key @view-list)
+        current-view (:fn (@current-view-key @view-list))
         current-view-state (rum/cursor app-state (rum/react (rum/cursor app-state :current-view)))]
     [:div
-     (swap-view app-state)
+     (main-nav app-state)
      [:div {:style {:border "1px solid #ccc"
                     :padding "4px"
                     :margin "0 0 12px 0"}}

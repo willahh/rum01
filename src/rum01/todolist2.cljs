@@ -7,16 +7,17 @@
 
 (defc root-view < rum/reactive [todolist-state]
   [:div
-   [:h3 "todolist2 - b"]
+   [:h3 "todolist2 - c"]
    (let [todolist-rows (rum/cursor todolist-state :rows)]
      [:div
       [:div (apply conj
                    [:div] (map (fn [m]
-                                 [:span {:style {:border "1px solid #ccc"
-                                                 :padding "2px"
-                                                 :margin "2px"}} (:name m)])
+                                 [:span.ui.red.horizontal.label
+                                  {:style {:border "1px solid #ccc"
+                                           :padding "2px"
+                                           :margin "2px"}} (:name m)])
                                (rum/react (rum/cursor todolist-state :rows))))]
-      [:button {:on-click
-                (fn [m] (swap! todolist-rows
-                               (fn [m]
-                                 (conj m {:id 3 :name "todolist2 item"}))))} "add todo"]])])
+      [:button.ui.red.button {:on-click
+                              (fn [m] (swap! todolist-rows
+                                             (fn [m]
+                                               (conj m {:id 3 :name "todolist2 item"}))))} "add todo"]])])

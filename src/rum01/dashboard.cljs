@@ -9,5 +9,9 @@
   [:div
    [:h3 "dashboard 5"]
    [:div "This view will load todolist view and home view and interact with them."]
-   (todolist-view/root-view todolist-state) 
+   [:div.ui.grid.container
+    [:div.six.wide.column
+     (todolist-view/root-view todolist-state)]
+    [:div.six.wide.column
+     (todolist-view/root-view todolist-state)]] 
    ])
