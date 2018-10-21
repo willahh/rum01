@@ -1,11 +1,12 @@
-(ns rum01.todolist2
+(ns rum01.front.todolist2.todolist2
   (:require [rum.core :as rum :refer [defc]]))
 
 (def state #:state {:rows [{:id 1 :name "Todo 1"}]
                     :click-count 0})
+
 (def state-key ::state)
 
-(defc root-view < rum/reactive [todolist-state]
+(defc todolist2-view < rum/reactive [todolist-state]
   [:div
    [:h3 "todolist2 - c"]
    (let [todolist-rows (rum/cursor todolist-state :rows)]

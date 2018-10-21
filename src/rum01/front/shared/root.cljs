@@ -1,11 +1,10 @@
-(ns rum01.root
+(ns rum01.front.shared.root
   (:require
    [goog.dom :as gdom]
    [rum.core :as rum :refer [defc]]
    [rum.cursor :as cursor]
-   [rum01.todolist.todolist-view :as todolist-view]
-   [rum01.todolist2 :as todolist2]
-   [rum01.dashboard :as dashboard]
+   [rum01.front.todolist.todolist :as todolist]
+   [rum01.front.todolist2.todolist2 :as todolist2]
    [clojure.string :as str]))
 
 (defc main-nav < rum/reactive [app-state]
@@ -25,7 +24,7 @@
                   ])
                (:view-list @app-state)))])
 
-(defc root-component < rum/reactive [app-state]
+(defc root-view < rum/reactive [app-state]
   (let [current-view-key (rum/cursor-in app-state [:current-view])
         view-list (rum/cursor-in app-state [:view-list])
         current-view (:fn (@current-view-key @view-list))
@@ -47,8 +46,8 @@
       [:div "Root"]
       [:div
        [:div "Root todolist"]
-       (todolist-view/root-view (rum/cursor app-state ::todolist-view/state-key))
+       (todolist/todolist-view (rum/cursor app-state ::todolist/state-key))
 
        [:div "Root todolist2"]
-       (todolist2/root-view (rum/cursor app-state ::todolist2/state-key))]]]))
+       (todolist2/todolist2-view (rum/cursor app-state ::todolist2/state-key))]]]))
 

@@ -1,4 +1,4 @@
-(ns rum01.todolist.todolist-view
+(ns rum01.front.todolist.todolist
   (:require [rum.core :as rum :refer [defc]]))
 
 (def state #:state {:key :state
@@ -9,7 +9,7 @@
 
 (def state-key ::state)
 
-(defc root-view < rum/reactive [todolist-state]
+(defc todolist-view < rum/reactive [todolist-state]
   [:div
    (let [todolist-rows (rum/cursor todolist-state :rows)
          click-count (rum/cursor todolist-state :click-count)]
@@ -29,6 +29,3 @@
                                   (fn [m] (swap! todolist-rows
                                                  (fn [m]
                                                    (conj m {:id 3 :name "todolist item"}))))} "add todo"]])])
-
-
-
