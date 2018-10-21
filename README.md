@@ -1,11 +1,5 @@
 # rum01
 
-FIXME: Write a one-line description of your library/project.
-
-## Overview
-
-FIXME: Write a paragraph about the library/project and highlight its goals.
-
 ## Development
 
 To get an interactive development environment run:
@@ -32,6 +26,6 @@ To create a production build run:
 
 ## License
 
-Copyright © 2018 FIXME
+Copyright © 2018 William Ravel
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
