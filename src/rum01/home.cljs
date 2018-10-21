@@ -3,6 +3,6 @@
 
 (defc home < rum/reactive [home-state]
   [:div
-   [:h4 "Home 2 3 4"]
-   [:div "State:"
-    (pr-str (rum/react home-state))]])
+   [:h4 "Home"]
+   [:div "State:" (pr-str (rum/react home-state))]])
+
