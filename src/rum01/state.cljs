@@ -15,6 +15,7 @@
          :view-list
          {
           ::home/state-key {:name "Home"
+                            
                             :fn home/root-view}
           ::todolist-view/state-key {:name "Todo list"
                                      :fn todolist-view/root-view}
